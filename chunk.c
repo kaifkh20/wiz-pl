@@ -22,9 +22,28 @@ void writeChunk(Chunk* chunk,uint8_t byte,int line){
     ++chunk->count;
 }
 
+
 int addConstants(Chunk* chunk,Value value){
     writeValueArray(&chunk->constants,value);
     return chunk->constants.count-1;
+}
+
+void writeConstant(Chunk* chunk,Value value,int line){
+  int idxConstant = addConstants(chunk,value);
+  if(idxConstant>255){
+    uint8_t byte1 = idxConstant>>24 & 0xFF;
+    uint8_t byte2 = idxConstant>>16 & 0xFF;
+    uint8_t byte3 = idxConstant>>8 && 0xFF;
+
+    writeChunk(chunk,OP_CONSTANT_LONG,line);
+    writeChunk(chunk,byte1,line);
+    writeChunk(chunk,byte2,line);
+    writeChunk(chunk,byte3,line);
+
+  }else{
+    writeChunk(chunk,OP_CONSTANT,line);
+    writeChunk(chunk,idxConstant,line);
+  }
 }
 
 void freeChunk(Chunk* chunk){

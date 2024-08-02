@@ -7,12 +7,10 @@ int main(int argc, char const *argv[])
     Chunk chunk;
     initChunk(&chunk);
     
-    int constant = addConstants(&chunk,1.2);
-    
-    writeChunk(&chunk,OP_CONSTANT,12);
-    
-    writeChunk(&chunk,constant,12);
-
+    // for(int i=0;i<300;++i){
+    //   writeConstant(&chunk,i,i);
+    writeConstant(&chunk,256,12);
+    // }
     writeChunk(&chunk,OP_RETURN,12);
 
     disassembleChunk(&chunk,"test chunk");
