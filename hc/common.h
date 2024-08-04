@@ -6,5 +6,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#define DEBUG_TRACE_EXUCATION
 
 #endif
