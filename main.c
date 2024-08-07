@@ -16,8 +16,13 @@ int main(int argc, char const *argv[])
     writeConstant(&chunk,259,13);
 
     writeChunk(&chunk,OP_ADD,13);
-    // writeChunk(&chunk,OP_NEGATE,13);
-    writeChunk(&chunk,OP_RETURN,13);
+    writeChunk(&chunk,OP_NEGATE,13);
+    // writeChunk(&chunk,OP_RETURN,13);
+    writeConstant(&chunk,200,14);
+    writeConstant(&chunk,210,14);
+    writeChunk(&chunk,OP_ADD,14);
+    writeChunk(&chunk,OP_ADD,15);
+    writeChunk(&chunk,OP_RETURN,14);
 
 
     disassembleChunk(&chunk,"test chunk");

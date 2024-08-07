@@ -29,6 +29,11 @@ Value pop(){
   return *vm.stackTop;
 }
 
+Value* peek(){
+  Value* stackPeek = vm.stackTop - 1;
+  return stackPeek;
+}
+
 static InterpretResult run(){
   #define READ_BYTE() (*vm.ip++)
   #define READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])
@@ -78,7 +83,9 @@ static InterpretResult run(){
         return INTERPRET_OK;
       }
       case OP_NEGATE:
-        push(-pop());
+        // push(-pop());
+        Value* top = peek();
+        *top = -(*top);
         break;
         
     }
